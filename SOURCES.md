@@ -20,3 +20,7 @@ typescript
 note-sticky-solid.svg
 <br>Aug 2024
 <br><https://fontawesome.com/v6/icons/note-sticky?f=classic&s=solid>
+
+gh-pages
+<br>Dec 2024
+<br><https://github.com/gitname/react-gh-pages>

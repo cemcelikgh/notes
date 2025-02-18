@@ -1,15 +1,17 @@
 'use client';
+
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
-import { setSearch } from "../redux/searchSlice";
+import { AppDispatch } from "../lib/store";
+import { selectSearchValue, setSearch }
+  from "../lib/features/searchSlice";
 
 function Search() {
 
-  const searchValue = useSelector((state: RootState) => state.search.searchValue);
+  const searchValue = useSelector(selectSearchValue);
 
   const dispatch = useDispatch<AppDispatch>();
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearch(e.target.value));
   }
 
@@ -18,7 +20,7 @@ function Search() {
       type="text"
       placeholder="Search"
       value={searchValue}
-      onChange={handleChange}
+      onChange={handleInput}
     />
   )
 }

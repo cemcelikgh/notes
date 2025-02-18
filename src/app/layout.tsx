@@ -1,19 +1,12 @@
-'use client';
-
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
-import { Provider } from "react-redux";
-import { store } from "../redux/store";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const metadata: Metadata = {
+  title: "Notes",
+  icons: {
+    icon: '/note-sticky-solid.svg'
+  }
+};
 
 export default function RootLayout({
   children,
@@ -22,10 +15,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Provider store={store}>
-          {children}
-        </Provider>
+      <body>
+        {children}
       </body>
     </html>
   )

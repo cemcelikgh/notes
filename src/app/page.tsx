@@ -1,24 +1,22 @@
-import type { Metadata } from "next";
-import styles from "./page.module.css";
+'use client';
+
 import NoteInput from "../components/NoteInput";
 import Notes from "../components/Notes";
 import Search from "../components/Search";
+import { Provider } from "react-redux";
+import { store } from "../lib/store";
 
-export const metadata: Metadata = {
-  title: "Notes",
-  icons: {
-    icon: 'note-sticky-solid.svg'
-  }
-};
 
 function Home() {
   return (
-    <main>
-      <h1 className={styles.heading}>NOTES</h1>
-      <Search />
-      <NoteInput />
-      <Notes />
-    </main>
+    <Provider store={store}>
+      <main>
+        <h1>NOTES</h1>
+        <Search />
+        <NoteInput />
+        <Notes />
+      </main>
+    </Provider>
   )
 }
 

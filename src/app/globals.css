@@ -1,12 +1,32 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --add-btn: #44c767;
+  --border: #767676;
+  --hover: #00bfff;
+  --red: #f06292;
+  --purple: #ba68c8;
+  --yellow: #ffd54f;
+  --blue: #4fc3f7;
+  --green: #aed581;
+  --remove: #FF2400;
+  --remove-hvr: #FF8A8A;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --add-btn: #10893e;
+    --border:#858585;
+    --hover:	#4169ff;
+    --red: #e81123;
+    --purple: #8764b8;
+    --yellow: #ff8c00;
+    --blue: #0063b1;
+    --green: #107c10;
+    --remove:	#D70040;
+    --remove-hvr: #FF0000;
   }
 }
 
@@ -14,6 +34,10 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html {
+  color-scheme: light dark;
 }
 
 html,
@@ -44,18 +68,17 @@ h1 {
   text-align: center;
 }
 
-#search {
+#search-text-input {
   display: block;
   margin: 25px auto 0;
   width: 67%;
   max-width: 415px;
   height: 36px;
-  border-radius: 25px;
   padding-left: 16px;
-}
-
-#search:focus {
-outline: 1px solid #0060df;
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  outline: none;
 }
 
 #note-input {
@@ -63,13 +86,29 @@ outline: 1px solid #0060df;
   position: relative;
 }
 
-#text-input {
+#note-text-input {
   width: 100%;
   min-height: 169px;
   padding: 20px;
   padding-bottom: 40px;
   font-size: large;
   resize: vertical;
+  appearance: none;
+  border: 1px solid var(--border);
+  outline: none;
+}
+
+#search-text-input:hover,
+#note-text-input:hover {
+  border: 1px solid var(--hover);
+  outline: none;
+}
+
+#search-text-input:focus-visible,
+#note-text-input:focus-visible {
+  appearance: none;
+  border: none;
+  outline: 1px solid var(--foreground);
 }
 
 #note-buttons {
@@ -96,11 +135,21 @@ outline: 1px solid #0060df;
   cursor: pointer;
 }
 
-.color-button:nth-child(1) { background-color: #e81123 }
-.color-button:nth-child(2) { background-color: #8764b8 }
-.color-button:nth-child(3) { background-color: #ff8c00 }
-.color-button:nth-child(4) { background-color: #0063b1 }
-.color-button:nth-child(5) { background-color: #107c10 }
+.color-button:nth-child(1) {
+  background-color: var(--red);
+}
+.color-button:nth-child(2) {
+   background-color: var(--purple);
+}
+.color-button:nth-child(3) {
+   background-color: var(--yellow);
+}
+.color-button:nth-child(4) {
+   background-color: var(--blue);
+}
+.color-button:nth-child(5) {
+   background-color: var(--green);
+}
 
 .selected {
   width: 28px;
@@ -112,7 +161,7 @@ outline: 1px solid #0060df;
   padding: 9px 32px;
   font-size: 16px;
   color: var(--foreground);
-  background-color: #10893e;
+  background-color: var(--add-btn);
   border: none;
   border-radius: 9px;
   cursor: pointer;
@@ -124,31 +173,65 @@ outline: 1px solid #0060df;
   flex-wrap: wrap;
 }
 
-#notes p {
+.note {
   width: 30%;
   height: fit-content;
   margin: 0 1.66% 3%;
   padding: 9px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-weight: 400;
   border-bottom-right-radius: 25px;
 }
 
+p {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-weight: 400;
+}
+
+.remove {
+  width: 20px;
+  height: 20px;
+  margin: -5px -3px 0 5px;
+  background-color: #ededed;
+  border: 1px solid #ededed;
+  border-radius: 3px;
+  float: right;
+  cursor: pointer;
+}
+
+#xmark {
+  fill: var(--remove);
+  width: 18px;
+  height: 18px;
+}
+
+#xmark:hover {
+  fill: var(--remove-hvr);
+}
+
+.red {
+  background-color: var(--red);
+}
+.purple {
+  background-color: var(--purple);
+}
+.yellow {
+  background-color: var(--yellow);
+}
+.blue {
+  background-color: var(--blue);
+}
+.green {
+  background-color: var(--green);
+}
+
 @media (width < 640px) {
-  #notes p {
+  .note {
     width: 46.50%;
   }
 }
 
 @media (width < 440px) {
-  #notes p {
+  .note {
     width: 96.50%;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
   }
 }

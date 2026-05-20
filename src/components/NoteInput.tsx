@@ -1,49 +1,53 @@
 'use client';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import type { NoteType } from '../types/NoteType';
+import { useAppDispatch } from '@/lib/hooks';
 import { addNote } from '../lib/features/notesSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
+const colArr = ['red', 'purple', 'yellow', 'blue', 'green'];
+
 function NoteInput() {
 
-  const colArr = ['e81123', '8764b8', 'ff8c00', '0063b1', '107c10'];
-  const [color, setColor] = useState<string>('e81123');
-  const [newNote, setNewNote] = useState<string>('');
-  const [selectedButton, setSelectedButton] = useState<number>(0);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const [newNote, setNewNote] = useState('');
+  const [color, setColor] = useState('red');
+  const [selectedButton, setSelectedButton] = useState(0);
 
-  const handleAddNote = (): void => {
+  const handleAddNote = () => {
     if(newNote.trim()) {
-      const noteObj: NoteType = {
+      const noteObj = {
         id: nanoid(),
         note: newNote,
-        color: color
-      }
+        color: color,
+      };
       dispatch(addNote(noteObj));
       setNewNote('');
-    }
-  }
+      const notesSFLS = localStorage.getItem('notes');
+      const notesAFLS = notesSFLS ? JSON.parse(notesSFLS) : [];
+      const notesWNN = [...notesAFLS, noteObj];
+      localStorage.setItem('notes', JSON.stringify(notesWNN));
+    };
+  };
 
-  const handleSelectColor = (color: string, index: number): void => {
+  const handleSelectColor = (color: string, index: number) => {
     setColor(color);
     setSelectedButton(index);
-  }
+  };
 
   return (
     <section id='note-input'>
-      <textarea id='text-input'
+      <textarea id='note-text-input'
         value={newNote}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        onChange={(e) => {
           setNewNote(e.target.value);
         }}
         placeholder="Enter your note here..."
       />
       <div id='note-buttons'>
         <div id='color-buttons'>
-          {colArr.map((color: string, index: number) => <button key={index}
-            className={`color-button${selectedButton === index ? ` selected` : ''}`}
+          {colArr.map((color, index) => <button key={index}
+            className={`color-button ${selectedButton === index ? 'selected' : ''}`}
             onClick={() => {handleSelectColor(color, index)}}
           />)}
         </div>
@@ -52,7 +56,8 @@ function NoteInput() {
         >ADD</button>
       </div>
     </section>
-  )
+  );
+
 }
 
 export default NoteInput;

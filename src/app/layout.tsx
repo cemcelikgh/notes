@@ -3,12 +3,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Notes",
-  icons: {
-    icon: '/note-sticky-solid.svg'
-  }
+  description: "Patika Intermediate Frontend Web Development Path Certification Task",
 };
 
-export default function RootLayout({
+function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,5 +17,7 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
+  );
 }
+
+export default RootLayout;
